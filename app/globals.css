@@ -9,13 +9,13 @@
   --paper: #FFFDFC;
   --petal: #FFF0F2;
   --rose: #FFE2E6;
-  --rose-deep: #9A4A6B;
+  --rose-deep: #8C4262;
   --mint: #DCEEE0;
   --lilac: #E8DEF6;
   --peach: #FFE4D3;
-  --ink: #3B3436;
-  --ink-soft: #675D60;
-  --script: #6F6769;
+  --ink: #2F292B;
+  --ink-soft: #574E51;
+  --script: #5E5759;
   --hairline: rgba(59, 52, 54, 0.16);
 
   /* --font-pinyon and --font-cormorant are injected by next/font in app/layout.tsx */
