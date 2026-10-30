@@ -4,8 +4,9 @@ import artistAtWork from "@/public/img/artist-at-work.webp";
 import liveCards from "@/public/img/live-cards.webp";
 import logoMark from "@/public/img/logo.webp";
 import {
+  INSTAGRAM_HANDLE,
   INSTAGRAM_URL,
-  SOCIAL_HANDLE,
+  TIKTOK_HANDLE,
   TIKTOK_URL,
   PACKAGE_INCLUDES,
   PACKAGES,
@@ -238,16 +239,16 @@ export function SiteFooter() {
       <p className="site-footer__name">Studio Dahlia</p>
       <p className="site-footer__tag">Live wedding &amp; event illustration &middot; Singapore</p>
       <p className="site-footer__social">
-        <a href={INSTAGRAM_URL} target="_blank" rel="noopener" aria-label={`Instagram ${SOCIAL_HANDLE}`}>
+        <a href={INSTAGRAM_URL} target="_blank" rel="noopener" aria-label={`Instagram ${INSTAGRAM_HANDLE}`}>
           <Instagram />
-          {SOCIAL_HANDLE}
+          {INSTAGRAM_HANDLE}
         </a>
         <span className="site-footer__divider" aria-hidden="true">
           |
         </span>
-        <a href={TIKTOK_URL} target="_blank" rel="noopener" aria-label={`TikTok ${SOCIAL_HANDLE}`}>
+        <a href={TIKTOK_URL} target="_blank" rel="noopener" aria-label={`TikTok ${TIKTOK_HANDLE}`}>
           <TikTok />
-          {SOCIAL_HANDLE}
+          {TIKTOK_HANDLE}
         </a>
       </p>
       <p className="site-footer__legal">

@@ -10,10 +10,10 @@ import lehenga from "@/public/img/lehenga.webp";
 import friends from "@/public/img/friends.webp";
 import kebayaCouple from "@/public/img/kebaya-couple.webp";
 
-// Same handle on both platforms
-export const SOCIAL_HANDLE = "@_studio.dahlia_";
+export const INSTAGRAM_HANDLE = "@_studio.dahlia_";
 export const INSTAGRAM_URL = "https://www.instagram.com/_studio.dahlia_";
-export const TIKTOK_URL = "https://www.tiktok.com/@_studio.dahlia_";
+export const TIKTOK_HANDLE = "@studio.dahlia";
+export const TIKTOK_URL = "https://www.tiktok.com/@studio.dahlia";
 
 export const NAV_LINKS = [
   { href: "#studio", label: "The Studio" },
