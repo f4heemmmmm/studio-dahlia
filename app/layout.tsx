@@ -30,10 +30,21 @@ export const metadata: Metadata = {
   title: "Studio Dahlia — Live Wedding & Event Illustration, Singapore",
   description:
     "Hand-painted live guest illustrations for weddings and events in Singapore, plus personal commissions and brand illustration.",
+  // Link previews (WhatsApp, iMessage, Instagram, Facebook, X, LinkedIn…) always
+  // show the logo card; 1200×630 is the size every platform shows uncropped
   openGraph: {
+    type: "website",
+    siteName: "Studio Dahlia",
+    url: "/",
     title: "Studio Dahlia — Live Wedding & Event Illustration",
     description: "Hand-painted watercolour keepsakes, painted live for your guests.",
-    images: ["/img/isaac-zakirah.webp"],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Studio Dahlia" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Studio Dahlia — Live Wedding & Event Illustration",
+    description: "Hand-painted watercolour keepsakes, painted live for your guests.",
+    images: ["/og-image.png"],
   },
 };
 
