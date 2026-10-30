@@ -15,8 +15,11 @@ export function PageEffects() {
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          entry.target.classList.add("is-in");
-          io.unobserve(entry.target);
+          const el = entry.target as HTMLElement;
+          el.classList.add("is-in");
+          io.unobserve(el);
+          // Once it has appeared, drop the stagger so later hover effects respond instantly
+          el.addEventListener("transitionend", () => (el.style.transitionDelay = ""), { once: true });
         }
       },
       { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },

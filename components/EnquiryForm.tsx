@@ -2,14 +2,16 @@
 
 import { startTransition, useActionState, useEffect, useRef, useState, type FormEvent } from "react";
 import { sendEnquiry, type EnquiryState } from "@/app/actions/enquire";
-import { ENQUIRY_OPTIONS, INSTAGRAM_HANDLE, INSTAGRAM_URL, OCCASIONS } from "@/lib/content";
-import { Instagram } from "./Icons";
+import { ENQUIRY_OPTIONS, OCCASIONS } from "@/lib/content";
+import { DatePicker } from "./form/DatePicker";
+import { Select } from "./form/Select";
 
 const initialState: EnquiryState = { status: "idle" };
 
 export function EnquiryForm() {
   const [state, formAction, pending] = useActionState(sendEnquiry, initialState);
   const [pkg, setPkg] = useState("Not sure yet");
+  const [occasion, setOccasion] = useState(OCCASIONS[0]);
   const successRef = useRef<HTMLDivElement>(null);
   const errorRef = useRef<HTMLParagraphElement>(null);
 
@@ -48,7 +50,6 @@ export function EnquiryForm() {
   const fieldErrors = state.status === "error" ? (state.fieldErrors ?? {}) : {};
 
   return (
-    <>
       <form className="form" onSubmit={onSubmit} noValidate>
         <div className="form__row">
           <div className="field">
@@ -89,35 +90,35 @@ export function EnquiryForm() {
         </div>
         <div className="form__row">
           <div className="field">
-            <label htmlFor="f-type">Occasion</label>
-            <select id="f-type" name="type" defaultValue={OCCASIONS[0]}>
-              {OCCASIONS.map((o) => (
-                <option key={o}>{o}</option>
-              ))}
-            </select>
-          </div>
-          <div className="field">
-            <label htmlFor="f-date">
-              Event date <span className="field__opt">(optional)</span>
+            <label htmlFor="f-phone">
+              Phone number <span className="field__opt">(optional)</span>
             </label>
-            <input id="f-date" name="date" type="date" />
+            <input
+              id="f-phone"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              inputMode="tel"
+              aria-invalid={fieldErrors.phone ? true : undefined}
+              aria-describedby={fieldErrors.phone ? "f-phone-error" : undefined}
+            />
+            {fieldErrors.phone ? (
+              <p className="field__error" id="f-phone-error">
+                {fieldErrors.phone}
+              </p>
+            ) : null}
           </div>
+          <DatePicker id="f-date" name="date" label="Event date" optional />
         </div>
         <div className="form__row">
-          <div className="field">
-            <label htmlFor="f-package">Interested in</label>
-            <select id="f-package" name="package" value={pkg} onChange={(e) => setPkg(e.target.value)}>
-              {ENQUIRY_OPTIONS.map((o) => (
-                <option key={o}>{o}</option>
-              ))}
-            </select>
-          </div>
-          <div className="field">
-            <label htmlFor="f-venue">
-              Venue <span className="field__opt">(optional)</span>
-            </label>
-            <input id="f-venue" name="venue" type="text" />
-          </div>
+          <Select id="f-type" name="type" label="Occasion" options={OCCASIONS} value={occasion} onChange={setOccasion} />
+          <Select id="f-package" name="package" label="Interested in" options={ENQUIRY_OPTIONS} value={pkg} onChange={setPkg} />
+        </div>
+        <div className="field">
+          <label htmlFor="f-venue">
+            Venue <span className="field__opt">(optional)</span>
+          </label>
+          <input id="f-venue" name="venue" type="text" />
         </div>
         <div className="field">
           <label htmlFor="f-notes">
@@ -144,14 +145,5 @@ export function EnquiryForm() {
           </button>
         </div>
       </form>
-
-      <p className="form__alt">
-        Prefer Instagram?{" "}
-        <a href={INSTAGRAM_URL} target="_blank" rel="noopener">
-          <Instagram className="form__alt-icon" />
-          Message {INSTAGRAM_HANDLE}
-        </a>
-      </p>
-    </>
   );
 }

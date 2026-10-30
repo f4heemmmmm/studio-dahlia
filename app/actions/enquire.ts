@@ -7,9 +7,11 @@ import { ENQUIRY_OPTIONS, OCCASIONS } from "@/lib/content";
 export type EnquiryState =
   | { status: "idle" }
   | { status: "success"; name: string }
-  | { status: "error"; message: string; fieldErrors?: Partial<Record<"name" | "email", string>> };
+  | { status: "error"; message: string; fieldErrors?: Partial<Record<"name" | "email" | "phone", string>> };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Digits with optional leading +, spaces, dashes, dots and brackets
+const PHONE_RE = /^\+?[\d\s().-]{6,24}$/;
 const MAX = { name: 100, email: 200, venue: 200, notes: 2000 };
 
 // Best-effort throttles: per IP, plus an overall cap so the form can't be used
@@ -54,9 +56,11 @@ export async function sendEnquiry(_prev: EnquiryState, formData: FormData): Prom
   // Collapse whitespace: the name goes into the email subject line
   const name = get("name").replace(/\s+/g, " ").slice(0, MAX.name);
   const email = get("email").slice(0, MAX.email);
-  const fieldErrors: Partial<Record<"name" | "email", string>> = {};
+  const phone = get("phone").replace(/\s+/g, " ");
+  const fieldErrors: Partial<Record<"name" | "email" | "phone", string>> = {};
   if (!name) fieldErrors.name = "Please add your name.";
   if (!EMAIL_RE.test(email)) fieldErrors.email = "Please enter a valid email address.";
+  if (phone && !PHONE_RE.test(phone)) fieldErrors.phone = "Please enter a valid phone number, or leave it blank.";
   if (Object.keys(fieldErrors).length) {
     return { status: "error", message: "Please check the highlighted fields.", fieldErrors };
   }
@@ -70,7 +74,7 @@ export async function sendEnquiry(_prev: EnquiryState, formData: FormData): Prom
   const from = process.env.ENQUIRY_FROM_EMAIL;
   if (!apiKey || !to || !from) {
     console.error("Enquiry form: RESEND_API_KEY, ENQUIRY_TO_EMAIL or ENQUIRY_FROM_EMAIL is not set");
-    return { status: "error", message: "Sorry, enquiries can't be sent right now. Please message us on Instagram." };
+    return { status: "error", message: "Sorry, enquiries can't be sent right now. Please try again later." };
   }
 
   // Only accept values the form actually offers
@@ -83,6 +87,7 @@ export async function sendEnquiry(_prev: EnquiryState, formData: FormData): Prom
   const rows: [string, string][] = [
     ["Name", name],
     ["Email", email],
+    ["Phone", phone],
     ["Occasion", occasion],
     ["Date", date],
     ["Venue", venue],

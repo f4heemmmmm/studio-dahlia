@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import logoMark from "@/public/img/logo-mark.png";
+import logoMark from "@/public/img/logo.webp";
 import { NAV_LINKS } from "@/lib/content";
 
 export function SiteHeader() {
@@ -38,7 +38,7 @@ export function SiteHeader() {
     <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
       <div className="site-header__inner">
         <a className="brand" href="#top" aria-label="Studio Dahlia, back to top">
-          <Image quality={90} src={logoMark} alt="" className="brand__mark" sizes="34px" preload />
+          <Image quality={90} src={logoMark} alt="" className="brand__mark" sizes="(max-width: 820px) 48px, 76px" preload />
           <span className="brand__name">Studio Dahlia</span>
         </a>
         <button

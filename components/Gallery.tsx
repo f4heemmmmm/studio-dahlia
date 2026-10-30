@@ -96,7 +96,9 @@ export function Gallery() {
       >
         {active ? (
           <figure className="lightbox__figure">
-            <Image quality={90} src={active.image} alt={active.alt} placeholder="blur" sizes="90vw" />
+            {/* Keyed so each piece gets a fresh <img>: reusing one would flash the
+                previous illustration until the new one loads */}
+            <Image key={active.title} quality={90} src={active.image} alt={active.alt} placeholder="blur" sizes="90vw" />
             <figcaption>
               {active.title} <span>{active.kind}</span>
             </figcaption>

@@ -2,10 +2,11 @@ import Image from "next/image";
 import couple from "@/public/img/couple.webp";
 import artistAtWork from "@/public/img/artist-at-work.webp";
 import liveCards from "@/public/img/live-cards.webp";
-import logoMark from "@/public/img/logo-mark.png";
+import logoMark from "@/public/img/logo.webp";
 import {
-  INSTAGRAM_HANDLE,
   INSTAGRAM_URL,
+  SOCIAL_HANDLE,
+  TIKTOK_URL,
   PACKAGE_INCLUDES,
   PACKAGES,
   SERVICES,
@@ -13,7 +14,7 @@ import {
 } from "@/lib/content";
 import { EnquiryForm } from "./EnquiryForm";
 import { Gallery } from "./Gallery";
-import { Instagram, Sparkle, Tiara } from "./Icons";
+import { Instagram, Sparkle, Tiara, TikTok } from "./Icons";
 
 function SectionHead({ eyebrow, title, id }: { eyebrow: string; title: string; id: string }) {
   return (
@@ -162,8 +163,8 @@ export function Packages() {
       <div className="packages__bg" aria-hidden="true" />
       <SectionHead eyebrow="Packages" title="Live Illustration" id="packages-title" />
       <div className="packages__grid">
-        {PACKAGES.map((pkg) => (
-          <article className={`package reveal${pkg.featured ? " package--premium" : ""}`} key={pkg.name}>
+        {PACKAGES.map((pkg, i) => (
+          <article className={`package package--tier-${i + 1} reveal${pkg.featured ? " package--premium" : ""}`} key={pkg.name}>
             {pkg.featured ? <Tiara className="package__tiara" /> : null}
             <h3 className="package__name">{pkg.name}</h3>
             <p className="package__hours">
@@ -233,13 +234,22 @@ export function Enquire() {
 export function SiteFooter() {
   return (
     <footer className="site-footer">
-      <Image quality={90} src={logoMark} alt="" className="site-footer__mark" sizes="64px" />
+      <Image quality={90} src={logoMark} alt="" className="site-footer__mark" sizes="140px" />
       <p className="site-footer__name">Studio Dahlia</p>
       <p className="site-footer__tag">Live wedding &amp; event illustration &middot; Singapore</p>
-      <a className="site-footer__ig" href={INSTAGRAM_URL} target="_blank" rel="noopener">
-        <Instagram />
-        {INSTAGRAM_HANDLE}
-      </a>
+      <p className="site-footer__social">
+        <a href={INSTAGRAM_URL} target="_blank" rel="noopener" aria-label={`Instagram ${SOCIAL_HANDLE}`}>
+          <Instagram />
+          {SOCIAL_HANDLE}
+        </a>
+        <span className="site-footer__divider" aria-hidden="true">
+          |
+        </span>
+        <a href={TIKTOK_URL} target="_blank" rel="noopener" aria-label={`TikTok ${SOCIAL_HANDLE}`}>
+          <TikTok />
+          {SOCIAL_HANDLE}
+        </a>
+      </p>
       <p className="site-footer__legal">
         &copy; {new Date().getFullYear()} Studio Dahlia. All illustrations hand-painted.
       </p>
