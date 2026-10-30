@@ -512,7 +512,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   border: 1px solid transparent; border-bottom-color: rgba(59, 52, 54, 0.35); border-radius: 0;
   transition: border-color 0.2s, background-color 0.2s;
 }
-.field textarea { resize: vertical; min-height: 84px; }
+.field textarea { resize: none; min-height: 84px; }
 .field input:focus, .field textarea:focus { background-color: #fff; border-color: var(--rose-deep); outline: none; }
 .field input[aria-invalid="true"] { border-color: #A3324A; }
 .field__error { color: #A3324A; font-size: 1rem; font-style: italic; }
