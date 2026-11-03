@@ -25,6 +25,13 @@ const siteUrl =
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : "http://localhost:3000");
 
+// The share image is served from the project's long-standing vercel.app address
+// on Vercel, so previews of either link (vercel.app or the custom domain) still
+// load on networks that block brand-new domains. OG_IMAGE_URL overrides it.
+const ogImage =
+  process.env.OG_IMAGE_URL ??
+  (process.env.VERCEL ? "https://studio-dahlia.vercel.app/og-image.png" : "/og-image.png");
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Studio Dahlia — Live Wedding & Event Illustration, Singapore",
@@ -38,13 +45,13 @@ export const metadata: Metadata = {
     url: "/",
     title: "Studio Dahlia — Live Wedding & Event Illustration",
     description: "Hand-painted watercolour keepsakes, painted live for your guests.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Studio Dahlia" }],
+    images: [{ url: ogImage, width: 1200, height: 630, alt: "Studio Dahlia" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Studio Dahlia — Live Wedding & Event Illustration",
     description: "Hand-painted watercolour keepsakes, painted live for your guests.",
-    images: ["/og-image.png"],
+    images: [ogImage],
   },
 };
 
