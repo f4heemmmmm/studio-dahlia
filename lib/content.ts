@@ -2,6 +2,7 @@ import type { StaticImageData } from "next/image";
 
 import liveCards from "@/public/img/live-cards.webp";
 import isaacZakirah from "@/public/img/isaac-zakirah.webp";
+import liyanaFaiz from "@/public/img/liyana-faiz.webp";
 import mAndA from "@/public/img/m-and-a.webp";
 import cheongsam from "@/public/img/cheongsam.webp";
 import oosPattern from "@/public/img/oos-pattern.webp";
@@ -163,6 +164,13 @@ export const GALLERY: GalleryItem[] = [
     category: "guests",
     image: friends,
     alt: "Three friends leaning in together, one holding a matcha drink and another a slice of cake.",
+  },
+  {
+    title: "Liyana & Faiz",
+    kind: "Wedding keepsake",
+    category: "couples",
+    image: liyanaFaiz,
+    alt: "Liyana and Faiz: a groom in a blush baju melayu and songkok beside a bride in a pink hijab and veil holding a bouquet, under a painted banner framed by pink lilies and tulips.",
   },
 ];
 
